@@ -1,29 +1,77 @@
 .sensor-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   gap: 20px;
+  padding: 30px;
+  background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.sensor-section {
+  background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  border-radius: 12px;
   padding: 20px;
+  width: 45%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.sensor-section:hover {
+  transform: scale(1.05);
+}
+
+.sensor-section h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.sensor-data {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sensor-data p {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-family: 'monospace';
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.sensor-data p:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .sensor-container {
+      flex-direction: column;
+      padding: 15px;
+  }
 
   .sensor-section {
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    h2 {
-      color: #333;
+      width: 100%;
       margin-bottom: 15px;
-    }
-
-    .sensor-data {
-      display: grid;
-      gap: 10px;
-
-      p {
-        margin: 0;
-        font-size: 16px;
-        color: #666;
-      }
-    }
   }
+}
+
+/* Subtle Animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.sensor-section:active {
+  animation: pulse 0.5s ease;
 }
