@@ -1,77 +1,121 @@
 .sensor-container {
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
-  padding: 30px;
-  background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #f0f4f8;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .sensor-section {
-  background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  border-radius: 12px;
+  background-color: white;
+  margin-bottom: 15px;
   padding: 20px;
-  width: 45%;
-  transition: transform 0.3s ease;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
 }
 
 .sensor-section:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
 .sensor-section h2 {
-  text-align: center;
+  color: #2c3e50;
+  font-size: 1.2rem;
   margin-bottom: 15px;
-  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #3498db;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #ffffff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
 }
 
 .sensor-data {
+  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
 }
 
 .sensor-data p {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-  font-family: 'monospace';
-  font-size: 16px;
-  transition: background 0.3s ease;
+  color: #34495e;
+  margin: 8px 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.sensor-data p:hover {
-  background: rgba(255, 255, 255, 0.2);
+.sensor-data p::before {
+  content: '•';
+  color: #3498db;
+  font-size: 1.5rem;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.imagen {
+  max-width: 50px;
+  height: 50px;
+  margin: 15px auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.imagen:hover {
+  transform: scale(1.1) rotate(5deg);
 }
 
 /* Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .sensor-container {
-      flex-direction: column;
-      padding: 15px;
+    width: 95%;
+    margin: 10px auto;
+    padding: 10px;
   }
 
   .sensor-section {
-      width: 100%;
-      margin-bottom: 15px;
+    padding: 15px;
+  }
+
+  .sensor-data p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
   }
 }
 
-/* Subtle Animations */
+/* Animaciones */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-.sensor-section:active {
-  animation: pulse 0.5s ease;
+.sensor-section:nth-child(2) {
+  animation: pulse 2s infinite;
 }

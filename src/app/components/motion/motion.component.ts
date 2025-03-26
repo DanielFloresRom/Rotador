@@ -12,18 +12,24 @@ import { takeUntil, throttleTime } from 'rxjs/operators';
 export class MotionComponent implements OnInit, OnDestroy {
   
   motionData: MotionData = {};
+  stepCount = 0;
   
-  // Subject para manejar la destrucción del componente
   private destroy$ = new Subject<void>();
 
   constructor(private motionS: MotionService) {}
 
   ngOnInit(): void {
-    // Usar interval con throttleTime para crear un delay entre actualizaciones
-    interval(2000) // Intervalo de 2 segundos
+    // Suscribirse al conteo de pasos
+    this.motionS.stepCount$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(count => {
+        this.stepCount = count;
+      });
+
+    interval(2000)
       .pipe(
-        takeUntil(this.destroy$), // Detener cuando el componente se destruya
-        throttleTime(2000) // Asegurar que solo se emita un valor cada 2 segundos
+        takeUntil(this.destroy$),
+        throttleTime(2000)
       )
       .subscribe(() => {
         this.motionS.startMotionDetection((data: MotionData) => {
@@ -34,11 +40,24 @@ export class MotionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Emitir señal para detener todas las suscripciones
     this.destroy$.next();
     this.destroy$.complete();
-
-    // Detener la detección de movimiento
     this.motionS.stopMotionDetection();
+  }
+
+  // Método para reiniciar el contador de pasos
+  resetStepCount() {
+    this.motionS.resetStepCount();
+  }
+
+  // Método para calcular la rotación del nivel
+  getNivelRotation(): string {
+    const betaRotation = this.motionData.rotation?.beta || 0;
+    const gammaRotation = this.motionData.rotation?.gamma || 0;
+
+    const clampedBeta = Math.max(-45, Math.min(45, betaRotation));
+    const clampedGamma = Math.max(-45, Math.min(45, gammaRotation));
+
+    return `rotateX(${clampedBeta}deg) rotateY(${clampedGamma}deg)`;
   }
 }

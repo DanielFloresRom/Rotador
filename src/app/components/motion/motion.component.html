@@ -1,19 +1,35 @@
 <div class="sensor-container">
+  <!-- Sección existente de Acelerómetro -->
   <div class="sensor-section">
     <h2>Acelerómetro</h2>
     <div class="sensor-data">
-      <p>X: {{motionData.acceleration?.x ?? 'No data'}}</p>
-      <p>Y: {{motionData.acceleration?.y ?? 'No data'}}</p>
-      <p>Z: {{motionData.acceleration?.z ?? 'No data'}}</p>
+      <p>X: {{ motionData.acceleration?.x ?? 'No data'}}</p>
+      <p>Y: {{ motionData.acceleration?.y ?? 'No data'}}</p>
+      <p>Z: {{ motionData.acceleration?.z  ?? 'No data' }}</p>
     </div>
   </div>
 
+  <!-- Nueva sección de Podómetro -->
+  <div class="sensor-section">
+    <h2>Podómetro</h2>
+    <div class="sensor-data">
+      <p>Pasos: {{ stepCount }}</p>
+      <button (click)="resetStepCount()">Reiniciar Contador</button>
+    </div>
+  </div>
+
+  <!-- Sección de Giroscopio existente -->
   <div class="sensor-section">
     <h2>Giroscopio</h2>
     <div class="sensor-data">
-      <p>Alpha: {{motionData.rotation?.alpha ?? 'No data'}}°</p>
-      <p>Beta: {{motionData.rotation?.beta ?? 'No data'}}°</p>
-      <p>Gamma: {{motionData.rotation?.gamma ?? 'No data'}}°</p>
+      <img class="imagen"
+        src="https://icones.pro/wp-content/uploads/2021/04/icone-trait-vert.png" 
+        class="nivel-image" 
+        [style.transform]="getNivelRotation()"
+      />
+      <p>Alpha: {{ motionData.rotation?.alpha ?? 'No data' }}°</p>
+      <p>Beta: {{ motionData.rotation?.beta  ?? 'No data' }}°</p>
+      <p>Gamma: {{ motionData.rotation?.gamma ?? 'No data'}}°</p>
     </div>
   </div>
 </div>
